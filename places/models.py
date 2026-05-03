@@ -2,7 +2,8 @@ from django.db import models
 
 class Place(models.Model):
   title = models.CharField(max_length=200)
-  description = models.TextField('Описание', blank=True)
+  description_short = models.TextField('Короткое описание', blank=True)
+  description_long = models.TextField('Длинное описание', blank=True)
   lng = models.FloatField('Долгота')
   lat = models.FloatField('Широта')
 

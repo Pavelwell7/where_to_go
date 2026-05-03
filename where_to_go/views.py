@@ -1,10 +1,6 @@
-import json
 from django.shortcuts import render
 from places.models import Place
-
-import json
-from django.shortcuts import render
-from places.models import Place
+from django.urls import reverse
 
 
 def show_map(request):
@@ -21,6 +17,8 @@ def show_map(request):
                 'properties': {
                     'title': place.title,
                     'placeId': place.id,
+                    'detailsUrl': reverse('place_details', args=[place.id]),
+
                 },
             }
             for place in places
