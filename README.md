@@ -1,103 +1,89 @@
 # Куда пойти — Москва глазами Артёма
 
-Фронтенд для будущего сайта о самых интересных местах в Москве. Авторский проект Артёма.
+Сайт с интерактивной картой Москвы и интересными местами. Авторский проект Артёма.
 
-![&#x41A;&#x443;&#x434;&#x430; &#x43F;&#x43E;&#x439;&#x442;&#x438;](.gitbook/assets/site.png)
 
-[Демка сайта](https://devmanorg.github.io/where-to-go-frontend/).
+## Как запустить локально
 
-## Как запустить
-
-* Скачайте код
-* Перейдите в каталог проекта с файлом `index.html`
-* Запустите веб-сервер
-* Откройте в браузере
-
-В качестве веб-сервера можно использовать что угодно. Например, подойдёт даже самый простой встроенный в Python веб-сервер:
+### 1. Скачай репозиторий
 
 ```bash
-$ python -m http.server 8000
+git clone https://github.com/ВАШ_НИКНЕЙМ/where_to_go.git
+cd where_to_go
 ```
 
-## Настройки
+### 2. Установи зависимости
 
-Внизу справа на странице можно включить отладочный режим логгирования.
-
-![debug mode](.gitbook/assets/debug-option.png)
-
-Настройки сохраняются в Local Storage браузера и не пропадают после обновления страницы. Чтобы сбросить настройки, удалите ключи из Local Storage с помощью Chrome Dev Tools —&gt; Вкладка Application —&gt; Local Storage.
-
-Если что-то работает не так, как ожидалось, то начните с включения отладочного режима логгирования.
-
-<a href="#" id="data-sources"></a>
-
-## Источники данных
-
-Фронтенд получает данные из двух источников. Первый источник — это JSON, запечённый внутрь HTML. Он содержит полный список объектов на карте. И он прячется внутри тега `script`:
-
-```javascript
-<script id="places-geojson" type="application/json">
-  {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [37.62, 55.793676]
-        },
-        "properties": {
-          // Специфичные для этого сайта данные
-          "title": "Легенды Москвы",
-          "placeId": "moscow_legends",
-          "detailsUrl": "./places/moscow_legends.json"
-        }
-      },
-      // ...
-    ]
-  }
-</script>
+```bash
+pip install -r requirements.txt
 ```
 
-При загрузке страницы JS код ищет тег с id `places-geojson`, считывает содержимое и помещает все объекты на карту.
+### 3. Создай файл `.env` в корне проекта
 
-Данные записаны в [формате GeoJSON](https://ru.wikipedia.org/wiki/GeoJSON). Все поля здесь стандартные, кроме `properties`. Внутри `properties` лежат специфичные для проекта данные:
+Добавь туда следующие переменные окружения:
 
-* `title` — название локации
-* `placeId` — уникальный идентификатор локации, строка или число
-* `detailsUrl` — адрес для скачивания доп. сведений о локации в JSON формате
+- SECRET_KEY=ваш-секретный-ключ
+- DEBUG=True
+- ALLOWED_HOSTS=127.0.0.1
 
-Значение поля `placeId` может быть либо строкой, либо числом. Само значение не играет большой роли, важно лишь чтобы оно было уникальным. Фронтенд использует `placeId` чтобы избавиться от дубликатов — если у двух локаций одинаковый `placeId`, то значит это одно и то же место.
+### 4. Примени миграции
 
-Второй источник данных — это те самые адреса в поле `detailsUrl` c подробными сведениями о локации. Каждый раз, когда пользователь выбирает локацию на карте, JS код отправляет запрос на сервер и получает картинки, текст и прочую информацию об объекте. Формат ответа сервера такой:
+```bash
+python manage.py migrate
+```
 
-```javascript
+### 5. Создай суперпользователя
+
+```bash
+python manage.py createsuperuser
+```
+
+### 6. Запусти сервер
+
+```bash
+python manage.py runserver
+```
+
+Сайт будет доступен по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+Админка: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+
+## Загрузка тестовых данных
+
+Чтобы загрузить место с фотографиями из JSON файла:
+
+```bash
+python manage.py load_place http://адрес/файла.json
+```
+
+Пример JSON файла с локацией:
+
+```json
 {
-    "title": "Экскурсионный проект «Крыши24.рф»",
+    "title": "Парк Горького",
     "imgs": [
-        "https://kudago.com/media/images/place/d0/f6/d0f665a80d1d8d110826ba797569df02.jpg",
-        "https://kudago.com/media/images/place/66/23/6623e6c8e93727c9b0bb198972d9e9fa.jpg",
-        "https://kudago.com/media/images/place/64/82/64827b20010de8430bfc4fb14e786c19.jpg",
+        "https://example.com/img1.jpg"
     ],
-    "description_short": "Хотите увидеть Москву с высоты птичьего полёта?",
-    "description_long": "<p>Проект «Крыши24.рф» проводит экскурсии ...</p>",
+    "description_short": "Главный парк Москвы",
+    "description_long": "<p>Описание парка</p>",
     "coordinates": {
-        "lat": 55.753676,
-        "lng": 37.64
+        "lat": 55.7300,
+        "lng": 37.6011
     }
 }
 ```
 
-## Используемые библиотеки
+## Используемые технологии
 
-* [Leaflet](https://leafletjs.com/) — отрисовка карты
-* [loglevel](https://www.npmjs.com/package/loglevel) для логгирования
-* [Bootstrap](https://getbootstrap.com/) — CSS библиотека
-* [Vue.js](https://ru.vuejs.org/) — реактивные шаблоны на фронтенде
+- [Django](https://www.djangoproject.com/) — бэкенд
+- [Leaflet](https://leafletjs.com/) — интерактивная карта
+- [Vue.js](https://ru.vuejs.org/) — реактивные шаблоны
+- [Bootstrap](https://getbootstrap.com/) — стили
+- [TinyMCE](https://www.tiny.cloud/) — редактор текста в админке
+- [django-admin-sortable2](https://django-admin-sortable2.readthedocs.io/) — сортировка фото в админке
 
 ## Цели проекта
 
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
 
 Тестовые данные взяты с сайта [KudaGo](https://kudago.com).
-
