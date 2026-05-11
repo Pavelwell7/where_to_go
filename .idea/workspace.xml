@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69547645-65a1-4de6-8dc9-aee0497a4e5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/media/1f09226ae0edf23d20708b4fcc498ffd.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/605da4a5bc8fd9a748526bef3b02120f.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/6e1c15fd7723e04e73985486c441e061.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/b896253e3b4f092cff47a02885450b5c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/be067a44fb19342c562e9ffd815c4215.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/f6148bf3acf5328347f2762a1a674620.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/places/management/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/places/management/commands/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/places/management/commands/load_place.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/places/migrations/0005_alter_place_description_long_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/places/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/places/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/where_to_go/.env" beforeDir="false" afterPath="$PROJECT_DIR$/where_to_go/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/where_to_go/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/where_to_go/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/where_to_go/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/where_to_go/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="69547645-65a1-4de6-8dc9-aee0497a4e5d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

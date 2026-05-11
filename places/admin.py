@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
+
 from .models import Place, Image
 
 
@@ -26,6 +27,7 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     readonly_fields = ['preview']
+    raw_id_fields = ['place']
 
     def preview(self, obj):
         if obj.image:
